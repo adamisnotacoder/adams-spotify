@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spotify Playlist Gallery</title>
+
+    <style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+    }
+    .spotify-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 16px;
+        padding: 16px;
+        max-width: 1800px;
+        margin: 0 auto;
+    }
+    .spotify-embed-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: transparent;
+        border-radius: 16px;
+        box-shadow: none;
+        padding: 0;
+        transition: none;
+    }
+    .spotify-embed-container:hover {
+        box-shadow: none;
+        transform: none;
+    }
+    .spotify-player {
+        width: 100%;
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin: 20px 0;
+        padding: 10px;
+    }
+    .pagination button {
+        padding: 8px 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background: white;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    .pagination button:hover {
+        background-color: #f0f0f0;
+    }
+    .pagination button.active {
+        background-color: #1DB954;
+        color: white;
+        border-color: #1DB954;
+    }
+    .pagination button:disabled {
+        background-color: #f0f0f0;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+    @media (max-width: 600px) {
+        .spotify-gallery {
+            grid-template-columns: 1fr;
+            padding: 8px;
+            gap: 8px;
+        }
+        .spotify-embed-container {
+            padding: 0;
+        }
+        .pagination {
+            flex-wrap: wrap;
+        }
+    }
+    /* Responsive iframe for embedding */
+    .iframe-banner {
+        background: #f6f6f6;
+        color: #333;
+        font-size: 1rem;
+        padding: 12px 20px;
+        border-bottom: 1px solid #e0e0e0;
+        margin-bottom: 16px;
+        text-align: center;
+        font-family: system-ui, sans-serif;
+    }
+    </style>
+    
+</head>
+<body>
+
+    <div class="iframe-banner">
+      <strong>Spotify Playlist Gallery</strong> &mdash; <br>
+      <span style="font-size:0.95em;">To embed this gallery in Squarespace or any website, host this file and use:<br>
+      <code>&lt;iframe src=&quot;URL_TO_THIS_FILE&quot; width=&quot;100%&quot; height=&quot;1400&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;</code></span>
+    </div>
+    
+<div id="playlist-data" style="display:none">[{"id": "2rmRwP7nWQ5L2vtfgnaQ4G", "name": "Hall of Fame", "image": "", "url": "https://open.spotify.com/playlist/2rmRwP7nWQ5L2vtfgnaQ4G"}, {"id": "3ldAQZmGqdVFrVTWStI4NN", "name": "Album Hall of Fame", "image": "", "url": "https://open.spotify.com/playlist/3ldAQZmGqdVFrVTWStI4NN"}, {"id": "7zJbscFbYBYMKl20f24i9l", "name": "music that reminds me of my strong independent grandma - if she liked indie", "image": "", "url": "https://open.spotify.com/playlist/7zJbscFbYBYMKl20f24i9l"}, {"id": "425seRVJvaJ1Z5bJhP5Alc", "name": "Certified hittas", "image": "", "url": "https://open.spotify.com/playlist/425seRVJvaJ1Z5bJhP5Alc"}, {"id": "4woLgxVE7DM0sOpAFsgBjw", "name": "My kinda noise", "image": "", "url": "https://open.spotify.com/playlist/4woLgxVE7DM0sOpAFsgBjw"}, {"id": "6gBN01JTPpsKJbYEq4SC4X", "name": "folky 2", "image": "", "url": "https://open.spotify.com/playlist/6gBN01JTPpsKJbYEq4SC4X"}, {"id": "4YatDPDonxz7Yjk0GaKmU8", "name": "indie mixie", "image": "", "url": "https://open.spotify.com/playlist/4YatDPDonxz7Yjk0GaKmU8"}, {"id": "7kFXl4ZF3Z6xGDLPzSFFtT", "name": "House Bar", "image": "", "url": "https://open.spotify.com/playlist/7kFXl4ZF3Z6xGDLPzSFFtT"}, {"id": "1Dgom3ZdGFsiCWYbIC2Dk7", "name": "Vinyl Groovin\u2019", "image": "", "url": "https://open.spotify.com/playlist/1Dgom3ZdGFsiCWYbIC2Dk7"}, {"id": "6kF5AsV9ZasDRxU9oF56MM", "name": "Hipster Cocktail Hour", "image": "", "url": "https://open.spotify.com/playlist/6kF5AsV9ZasDRxU9oF56MM"}, {"id": "68lSnvjSFAEdo9orcLvwyr", "name": "Lil' bit jazzy", "image": "", "url": "https://open.spotify.com/playlist/68lSnvjSFAEdo9orcLvwyr"}, {"id": "2WOEsc3b9COdsMbKmGUBe3", "name": "Table Talk", "image": "", "url": "https://open.spotify.com/playlist/2WOEsc3b9COdsMbKmGUBe3"}, {"id": "5pJR22qdboGSbyvQWXmjAY", "name": "Soir\u00e9e en Vogue", "image": "", "url": "https://open.spotify.com/playlist/5pJR22qdboGSbyvQWXmjAY"}, {"id": "7LStrBSRKYz49CQ9T1zAHB", "name": "please don\u2019t tell", "image": "", "url": "https://open.spotify.com/playlist/7LStrBSRKYz49CQ9T1zAHB"}, {"id": "7ma3ZRUamIfqi59X5REM4k", "name": "Dinner Party", "image": "", "url": "https://open.spotify.com/playlist/7ma3ZRUamIfqi59X5REM4k"}, {"id": "3QeLDEf0jToZQQ3yRvMEk9", "name": "Melted Butta \ud83e\uddc8", "image": "", "url": "https://open.spotify.com/playlist/3QeLDEf0jToZQQ3yRvMEk9"}, {"id": "0OG4cFOQtYzYs8nvxLG5hn", "name": "Lil\u2019 bit hype", "image": "", "url": "https://open.spotify.com/playlist/0OG4cFOQtYzYs8nvxLG5hn"}, {"id": "0OtzXxX9M5UJj8IHNJIoHh", "name": "Songs that make me disobey the speed limit", "image": "", "url": "https://open.spotify.com/playlist/0OtzXxX9M5UJj8IHNJIoHh"}, {"id": "4HaKCnh8RYRrIVGtWIZdFG", "name": "Poolin", "image": "", "url": "https://open.spotify.com/playlist/4HaKCnh8RYRrIVGtWIZdFG"}, {"id": "6xyM47DG93RHcz7Np3irqh", "name": "Party", "image": "", "url": "https://open.spotify.com/playlist/6xyM47DG93RHcz7Np3irqh"}, {"id": "4SeAeXgR8CMBqKryZrItnp", "name": "First Round Party Draft Picks", "image": "", "url": "https://open.spotify.com/playlist/4SeAeXgR8CMBqKryZrItnp"}, {"id": "4W1mvZmGJSBm1vQvGAzMsU", "name": "Fakes", "image": "", "url": "https://open.spotify.com/playlist/4W1mvZmGJSBm1vQvGAzMsU"}, {"id": "19OYrvPlYWyUp8xiy7uMkh", "name": "when @ kstate", "image": "", "url": "https://open.spotify.com/playlist/19OYrvPlYWyUp8xiy7uMkh"}, {"id": "2yREtlv5RGhYmiLNbZc7mj", "name": "Wanderlust", "image": "", "url": "https://open.spotify.com/playlist/2yREtlv5RGhYmiLNbZc7mj"}, {"id": "0fRSJWYLfrCUqMGMIeCQjM", "name": "Sunny Days", "image": "", "url": "https://open.spotify.com/playlist/0fRSJWYLfrCUqMGMIeCQjM"}, {"id": "4EiYX7g4uScMcOLQ2weOkP", "name": "Neon Dreams & Coffee Beans", "image": "", "url": "https://open.spotify.com/playlist/4EiYX7g4uScMcOLQ2weOkP"}, {"id": "4nqfhwKFdNtPcHZS33UNbb", "name": "for the main character in you", "image": "", "url": "https://open.spotify.com/playlist/4nqfhwKFdNtPcHZS33UNbb"}, {"id": "6hNoZy6rq60PgqqIj2E1ra", "name": "songs that sound better loud af", "image": "", "url": "https://open.spotify.com/playlist/6hNoZy6rq60PgqqIj2E1ra"}, {"id": "5hyHEtvufcLKsxS95WR46p", "name": "Hosting", "image": "", "url": "https://open.spotify.com/playlist/5hyHEtvufcLKsxS95WR46p"}, {"id": "4fHScnqCl47lyu0oqX7uVc", "name": "Gather", "image": "", "url": "https://open.spotify.com/playlist/4fHScnqCl47lyu0oqX7uVc"}, {"id": "6rtPT70IGXZIFWzwPfIN9y", "name": "headphones mandatory", "image": "", "url": "https://open.spotify.com/playlist/6rtPT70IGXZIFWzwPfIN9y"}, {"id": "3ngG6ibRoNItl68rRESU50", "name": "Halloween 2024", "image": "", "url": "https://open.spotify.com/playlist/3ngG6ibRoNItl68rRESU50"}, {"id": "4qKtls6rrVA4Wl271P2CId", "name": "Savor & Cheers", "image": "", "url": "https://open.spotify.com/playlist/4qKtls6rrVA4Wl271P2CId"}, {"id": "41dMNxvWfUSGAxGGnRAz7V", "name": "Elegance Eve", "image": "", "url": "https://open.spotify.com/playlist/41dMNxvWfUSGAxGGnRAz7V"}, {"id": "3aQezH643tPX5DVIjrmzbM", "name": "May 2025", "image": "", "url": "https://open.spotify.com/playlist/3aQezH643tPX5DVIjrmzbM"}, {"id": "0p9dddYL4RgWSXNKq5CKhh", "name": "Best of 2025", "image": "", "url": "https://open.spotify.com/playlist/0p9dddYL4RgWSXNKq5CKhh"}, {"id": "3RD2iXGNBB1ZMu5TY9UJqb", "name": "April 2025", "image": "", "url": "https://open.spotify.com/playlist/3RD2iXGNBB1ZMu5TY9UJqb"}, {"id": "14RKX5BOhmVCoQVoj7y7IC", "name": "March 2025", "image": "", "url": "https://open.spotify.com/playlist/14RKX5BOhmVCoQVoj7y7IC"}, {"id": "5JOkAGOZs8ke5diqC01A0V", "name": "February 2025", "image": "", "url": "https://open.spotify.com/playlist/5JOkAGOZs8ke5diqC01A0V"}, {"id": "3UHF1siRzPukCElSibXq7q", "name": "January 2025", "image": "", "url": "https://open.spotify.com/playlist/3UHF1siRzPukCElSibXq7q"}, {"id": "65vopMEIRHEj3RGm4Qym6D", "name": "Best of 2024", "image": "", "url": "https://open.spotify.com/playlist/65vopMEIRHEj3RGm4Qym6D"}, {"id": "6muo800S0wDcUmEZekdzvb", "name": "December 2024", "image": "", "url": "https://open.spotify.com/playlist/6muo800S0wDcUmEZekdzvb"}, {"id": "2xHqVYSJhtqvjc4fuLrPvh", "name": "November 2024", "image": "", "url": "https://open.spotify.com/playlist/2xHqVYSJhtqvjc4fuLrPvh"}, {"id": "1LfgYoC4WZ5KZezVh4iefa", "name": "October 2024", "image": "", "url": "https://open.spotify.com/playlist/1LfgYoC4WZ5KZezVh4iefa"}, {"id": "3lSyrRhq8lo9l2GI2EDzpm", "name": "September 2024", "image": "", "url": "https://open.spotify.com/playlist/3lSyrRhq8lo9l2GI2EDzpm"}, {"id": "59jD2NbmGgCIbAkmKFzDSX", "name": "August 2024", "image": "", "url": "https://open.spotify.com/playlist/59jD2NbmGgCIbAkmKFzDSX"}, {"id": "12l9zM3TxxvwmAIQqxxNpx", "name": "July 2024", "image": "", "url": "https://open.spotify.com/playlist/12l9zM3TxxvwmAIQqxxNpx"}, {"id": "24bynFGxF2wiYwKZ0HO2f4", "name": "June 2024", "image": "", "url": "https://open.spotify.com/playlist/24bynFGxF2wiYwKZ0HO2f4"}, {"id": "6LdLETCUn58eT8DCbcTUs5", "name": "May 2024", "image": "", "url": "https://open.spotify.com/playlist/6LdLETCUn58eT8DCbcTUs5"}, {"id": "4F9sJCZpIGXgS7u7bAx6WD", "name": "April 2024", "image": "", "url": "https://open.spotify.com/playlist/4F9sJCZpIGXgS7u7bAx6WD"}, {"id": "0pTs3jgQXhRgdvXoBRTgJl", "name": "March 2024", "image": "", "url": "https://open.spotify.com/playlist/0pTs3jgQXhRgdvXoBRTgJl"}, {"id": "6uY80sZ9TIJFmrCVMiV1hY", "name": "February 2024", "image": "", "url": "https://open.spotify.com/playlist/6uY80sZ9TIJFmrCVMiV1hY"}, {"id": "0TiqRTMJSfnSfKd9urTO55", "name": "January 2024", "image": "", "url": "https://open.spotify.com/playlist/0TiqRTMJSfnSfKd9urTO55"}, {"id": "5AWIh4KONqWjdjZJDBHso8", "name": "2023", "image": "", "url": "https://open.spotify.com/playlist/5AWIh4KONqWjdjZJDBHso8"}, {"id": "2994bWTaS0sBEPANZyGlY0", "name": "Best of 2023", "image": "", "url": "https://open.spotify.com/playlist/2994bWTaS0sBEPANZyGlY0"}, {"id": "2LIBm8ZdoNasZmayNQD0aH", "name": "December 2023", "image": "", "url": "https://open.spotify.com/playlist/2LIBm8ZdoNasZmayNQD0aH"}, {"id": "1UWAXa5ScGDV6EcbGsr1ED", "name": "October 2023", "image": "", "url": "https://open.spotify.com/playlist/1UWAXa5ScGDV6EcbGsr1ED"}, {"id": "1zbs6tHjS375Z5kEVEqv5V", "name": "September 2023", "image": "", "url": "https://open.spotify.com/playlist/1zbs6tHjS375Z5kEVEqv5V"}, {"id": "2QGNJYydaFWa1gca7eXUlj", "name": "August 2023", "image": "", "url": "https://open.spotify.com/playlist/2QGNJYydaFWa1gca7eXUlj"}, {"id": "4qzWYZVI3tA61YJbzjZj34", "name": "July 2023", "image": "", "url": "https://open.spotify.com/playlist/4qzWYZVI3tA61YJbzjZj34"}, {"id": "3sWT2GGL2zbumorEDTKyy7", "name": "June 2023", "image": "", "url": "https://open.spotify.com/playlist/3sWT2GGL2zbumorEDTKyy7"}, {"id": "01ipnKjdGubvVT4tVqZf2d", "name": "May 2023", "image": "", "url": "https://open.spotify.com/playlist/01ipnKjdGubvVT4tVqZf2d"}, {"id": "0yDsW5HDFJDOTjeXQYx3dM", "name": "April 2023", "image": "", "url": "https://open.spotify.com/playlist/0yDsW5HDFJDOTjeXQYx3dM"}, {"id": "7iQoHvIrT0KGkR61eTmvmZ", "name": "March 2023", "image": "", "url": "https://open.spotify.com/playlist/7iQoHvIrT0KGkR61eTmvmZ"}, {"id": "6vveMyUWrJG5eBpjbGnH12", "name": "February 2023", "image": "", "url": "https://open.spotify.com/playlist/6vveMyUWrJG5eBpjbGnH12"}]</div>
+<div class="pagination" id="pagination"></div>
+<div class="spotify-gallery" id="gallery"></div>
+
+        <script>
+        const PLAYLISTS_PER_PAGE = 15;
+        let currentPage = 1;
+        let playlists = [];
+        let loadedPlaylists = new Set();
+        
+        function initializeGallery() {
+            const dataElement = document.getElementById('playlist-data');
+            playlists = JSON.parse(dataElement.textContent);
+            const totalPages = Math.ceil(playlists.length / PLAYLISTS_PER_PAGE);
+            
+            // Initialize pagination
+            const pagination = document.getElementById('pagination');
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement('button');
+                button.textContent = i;
+                button.onclick = () => loadPage(i);
+                pagination.appendChild(button);
+            }
+            
+            // Load first page
+            loadPage(1);
+        }
+        
+        function loadPage(page) {
+            currentPage = page;
+            const startIdx = (page - 1) * PLAYLISTS_PER_PAGE;
+            const endIdx = Math.min(startIdx + PLAYLISTS_PER_PAGE, playlists.length);
+            
+            // Update pagination buttons
+            document.querySelectorAll('#pagination button').forEach((btn, idx) => {
+                btn.classList.toggle('active', idx + 1 === page);
+                btn.disabled = idx + 1 === page;
+            });
+            
+            // Clear gallery
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = '';
+            
+            // Load playlists for this page
+            for (let i = startIdx; i < endIdx; i++) {
+                const pl = playlists[i];
+                if (!loadedPlaylists.has(pl.id)) {
+                    loadPlaylist(pl);
+                    loadedPlaylists.add(pl.id);
+                }
+            }
+        }
+        
+        function loadPlaylist(pl) {
+            const container = document.createElement('div');
+            container.className = 'spotify-embed-container';
+            container.innerHTML = `
+                <div class="spotify-player">
+                    <iframe 
+                        style="border-radius:12px" 
+                        src="https://open.spotify.com/embed/playlist/${pl.id}?utm_source=generator" 
+                        width="100%" 
+                        height="352" 
+                        frameborder="0" 
+                        allowfullscreen="" 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            `;
+            document.getElementById('gallery').appendChild(container);
+        }
+        
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initializeGallery);
+        </script>
+        
+</body>
+</html>
